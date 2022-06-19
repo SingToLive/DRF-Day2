@@ -26,7 +26,7 @@ class CustomUser(AbstractBaseUser):
     password = models.CharField("비밀번호", max_length=200)
     email = models.EmailField("이메일 주소", max_length=100)
     fullname = models.CharField("이름", max_length=20)
-    join_date = models.DateField("가입일", auto_now_add=True)
+    join_date = models.DateTimeField("가입일", auto_now_add=True)
     
     is_active = models.BooleanField(default=True)
     
