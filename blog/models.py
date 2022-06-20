@@ -11,9 +11,11 @@ class Category(models.Model):
 class Article(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    category = models.OneToOneField(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     content = models.TextField(max_length=3000)
-    
+    view_start_day = models.DateField(null=True)
+    view_end_day = models.DateField(null=True)
+    upload_date = models.DateField(null=True)
     def __str__(self):
         return f'{self.author} / {self.name} / {self.category} / {self.content}'
     

@@ -2,11 +2,15 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from drf2.permissions import RegistedMoreThanAThreeDayUser as R
+from drf2.permissions import IsAdminOrIsAuthenticatedReadOnly as I
+from blog.models import Article as ArticleModel
 # Create your views here.
 class MakeArticle(APIView):
-    permission_classes = [R]
+    permission_classes = [I]
     def get(self, request):
-        return render('main.html')
+        filter_sort_article = ArticleModel.objects.filter(view_start_day__gt='2022-06-12', view_start_day__lte='2022-06-20').order_by('upload_date')
+    
+        return Response({'message':'article is filtered and sorted'})
     
     def post(self, request):
 
